@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<div id="text-log" >
+
+</div>
+<div>
+    <input id="inp-test" /><button id="btn-send">send</button>
+</div>
+
+<script>
+
+    // if user is running mozilla then use it's built-in WebSocket
+    window.WebSocket = window.WebSocket || window.MozWebSocket;
+
+    var connection = new WebSocket('ws://localhost:1337');
+
+    connection.onopen = function (evt) {
+        // connection is opened and ready to use
+
+        console.log('open success');
+        console.log(evt);
+    };
+
+    connection.onerror = function (error) {
+        // an error occurred when sending/receiving data
+        console.log('open error');
+    };
+
+    connection.onclose = function(evt) {
+
+        console.log('close connection');
+        console.log(evt);
+
+    }
+
+    connection.onmessage = function (message) {
+        // try to decode json (I assume that each message from server is json)
+        try {
+
+            var json = JSON.parse(message.data);
+
+            console.log(message);
+
+            document.querySelector('#text-log').innerText = json.msg;
+
+        } catch (e) {
+            console.log('This doesn\'t look like a valid JSON: ', message.data);
+            return;
+        }
+        // handle incoming message
+    };
+
+
+    document.querySelector('#btn-send').addEventListener('click',function(evt) {
+        connection.send(document.querySelector('#inp-test').value);
+    });
+
+
+</script>
+
+</body>
+</html>

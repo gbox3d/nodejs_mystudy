@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>mdir for web</title>
+
+    <script src="../lib/jquery-2.0.3.min.js"></script>
+
+</head>
+<body>
+
+<div class="header" >
+
+    <div>pass wd: <input class="inp-passwd" value="1234"/></div>
+
+    <div>
+        <textarea class="file-content" >
+        </textarea>
+    </div>
+
+    <div>
+        <div>new:<input class="inp-newpasswd" /> <button class="btn-passwd" >set passwd</button></div>
+
+    </div>
+
+</div>
+
+<div class="content" >
+
+    <div class="file-listview" >
+        <div>
+            <button class="btn-go-home-dir" >[Home]</button>
+            <button class="btn-go-parent-dir" >[..]</button>
+        </div>
+
+        <div style="width: 300px;height: 200px;border: 1px solid;margin: 10px;
+        overflow: auto;
+        white-space: nowrap;
+        " >
+            <ul class="file-list" ></ul>
+
+        </div>
+
+
+        <div>
+            <div><input class="file-name" /><button class="btn-save" >save</button><button class="btn-open" >open</button></div>
+            <button class="btn-del" >del</button>
+            <button class="btn-mkdir" >make directory</button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    var theApp={};
+    theApp.baseUrl = 'http://localhost:12800';
+    theApp.currentPath = '/';
+
+    theApp.UIElement = {};
+    theApp.UIElement.listFile = document.querySelector('.content .file-list');
+    theApp.UIElement.inpPasswd = document.querySelector('.header .inp-passwd');
+    theApp.UIElement.inpFileName = document.querySelector('.file-listview .file-name');
+    theApp.UIElement.inpFileContent = document.querySelector('.header .file-content');
+
+    //패스워드 세팅
+    document.querySelector('.header .btn-passwd').addEventListener('click',function(e) {
+
+        var param = {
+            oldpass : theApp.UIElement.inpPasswd.value,
+            newpass : document.querySelector('.inp-newpasswd').value
+        }
+
+        $.ajax({
+            url:  theApp.baseUrl + '/set_passwd',
+            type: 'POST',
+            processData: false,
+            data: JSON.stringify(param),
+            success: function(data, textStatus, jqXHR) {
+                console.log('success receive  data');
+                console.log( data );
+            },
+            complete: function(jqXHR, textStatus) {
+                console.log('complete');
+
+            },
+            error: function(qXHR, textStatus, errorThrown) {
+                console.log('error');
+            }
+        });
+    });
+
+    //파일 오픈
+    document.querySelector('.file-listview .btn-open').addEventListener('click',function(e) {
+
+
+        var filename = theApp.UIElement.inpFileName.value;
+
+        if(filename[filename.length-1] == '/') { //디랙토리일경우
+
+            theApp.currentPath += filename;
+            catalogFileList(theApp.currentPath);
+
+        }
+        else { //파일이면
+            var param = {
+                password : theApp.UIElement.inpPasswd.value,
+                file : filename,
+                path : theApp.currentPath
+            }
+
+            $.ajax({
+                url:  theApp.baseUrl + '/load',
+                type: 'POST',
+                processData: false,
+                data: JSON.stringify(param),
+                success: (function(data, textStatus, jqXHR) {
+                    console.log('success receive  data');
+                    console.log( data );
+
+                    var dataObj = JSON.parse(data);
+
+                    if(dataObj.result == 'loadOk')
+                    {
+                        //theApp.UIElement.inpFileName.value = this.file_info.name;
+                        theApp.UIElement.inpFileContent.value = dataObj.data;
+                    }
+
+                }).bind(this),
+                complete: function(jqXHR, textStatus) {
+                    console.log('complete');
+
+                },
+                error: function(qXHR, textStatus, errorThrown) {
+                    console.log('error');
+                }
+            });//ajax end
+
+        }
+
+    });
+
+    //save
+    document.querySelector('.file-listview .btn-save').addEventListener('click',function(e) {
+
+        var param = {
+            password : theApp.UIElement.inpPasswd.value,
+            file : theApp.UIElement.inpFileName.value,
+            path : theApp.currentPath,
+            data : theApp.UIElement.inpFileContent.value
+        }
+
+        $.ajax({
+            url:  theApp.baseUrl + '/save',
+            type: 'POST',
+            processData: false,
+            data: JSON.stringify(param),
+            success: function(data, textStatus, jqXHR) {
+                console.log('success receive  data');
+                console.log( data );
+
+                catalogFileList(theApp.currentPath);
+
+            },
+            complete: function(jqXHR, textStatus) {
+                console.log('complete');
+
+            },
+            error: function(qXHR, textStatus, errorThrown) {
+                console.log('error');
+            }
+        });
+    });
+    //디랙토리 만들기
+    document.querySelector('.file-listview .btn-mkdir').addEventListener('click',function(e) {
+
+        var param = {
+            password : theApp.UIElement.inpPasswd.value,
+            path : theApp.currentPath + '/' + theApp.UIElement.inpFileName.value
+//            data : theApp.UIElement.inpFileContent.value
+        }
+
+        $.ajax({
+            url:  theApp.baseUrl + '/save',
+            type: 'POST',
+            processData: false,
+            data: JSON.stringify(param),
+            success: function(data, textStatus, jqXHR) {
+                console.log('success receive  data');
+                console.log( data );
+
+                catalogFileList(theApp.currentPath);
+
+            },
+            complete: function(jqXHR, textStatus) {
+                console.log('complete');
+
+            },
+            error: function(qXHR, textStatus, errorThrown) {
+                console.log('error');
+            }
+        });
+    });
+
+    //파일삭제
+    document.querySelector('.file-listview .btn-del').addEventListener('click',function(e) {
+
+        var param = {
+            password : theApp.UIElement.inpPasswd.value,
+            file : theApp.UIElement.inpFileName.value,
+            path : theApp.currentPath
+        }
+
+        $.ajax({
+            url:  theApp.baseUrl + '/del',
+            type: 'POST',
+            processData: false,
+            data: JSON.stringify(param),
+            success: function(data, textStatus, jqXHR) {
+                console.log('success receive  data');
+                console.log( data );
+
+                catalogFileList(theApp.currentPath);
+
+            },
+            complete: function(jqXHR, textStatus) {
+                console.log('complete');
+
+            },
+            error: function(qXHR, textStatus, errorThrown) {
+                console.log('error');
+            }
+        });
+    });
+
+    //한단계 위로 나가기
+    document.querySelector('.file-listview .btn-go-parent-dir').addEventListener('click',function(e) {
+
+        console.log(theApp.currentPath);
+
+        //루트가 아닐경우
+        if(theApp.currentPath.length > 1 ) {
+            theApp.currentPath = theApp.currentPath.slice(0,theApp.currentPath.length-1);
+
+            //console.log(theApp.currentPath.lastIndexOf('/'));
+            //console.log(theApp.currentPath);
+
+            theApp.currentPath = theApp.currentPath.slice(0,theApp.currentPath.lastIndexOf('/') + 1);
+
+            catalogFileList(theApp.currentPath);
+
+        }
+
+    });
+
+    //홈으로가기(root)
+    document.querySelector('.file-listview .btn-go-home-dir').addEventListener('click',function(e) {
+
+        theApp.currentPath = '/';
+        catalogFileList(theApp.currentPath);
+
+    });
+
+    //파일목록 처리
+    function catalogFileList(directory) {
+
+        console.log(directory);
+
+        var param = {
+            password : theApp.UIElement.inpPasswd.value,
+            path : directory
+        }
+
+        $.ajax({
+            url:  theApp.baseUrl + '/catalog',
+            type: 'POST',
+            processData: false,
+            data: JSON.stringify(param),
+            success: function(data, textStatus, jqXHR) {
+
+                console.log('success receive  data');
+                console.log( data );
+
+                var dataObj = JSON.parse(data);
+
+                if(dataObj.result == 'ok' ||
+                        dataObj.result == 'emptyFolder') {
+                    //리스트 클리어
+                    while(theApp.UIElement.listFile.firstChild) {
+
+                        var element = theApp.UIElement.listFile.firstChild;
+                        theApp.UIElement.listFile.removeChild(element);
+                    }
+
+                    var file_list = dataObj.data || [];
+
+
+                    for(var i=0; i< file_list.length;i++) {
+
+                        var item = document.createElement('li');
+
+                        //파일이면..
+                        if(file_list[i].type == 0) {
+
+                            item.innerText = file_list[i].name;
+                            item.file_info = file_list[i];
+
+                            //파일 선택
+                            item.addEventListener('click',function(e) {
+                                theApp.UIElement.inpFileName.value = this.file_info.name;
+                            });//addEventListener end
+
+                        }
+                        else {
+                            //디랙토리일경우
+                            var name_item = document.createElement('span');
+                            name_item.innerText = '[' + file_list[i].name + ']';
+                            name_item.file_info = file_list[i];
+                            name_item.style.backgroundColor = '#888';
+
+                            //디랙토리 열기
+                            name_item.addEventListener('click',function(e) {
+
+                                theApp.UIElement.inpFileName.value = this.file_info.name + '/';
+
+                                //theApp.currentPath += this.file_info.name + '/';
+                                //catalogFileList(theApp.currentPath);
+
+                            });
+
+                            item.appendChild(name_item);
+                        }
+
+                        theApp.UIElement.listFile.appendChild(item);
+                    }
+
+                }
+
+
+            },
+            complete: function(jqXHR, textStatus) {
+                console.log('complete');
+
+            },
+            error: function(qXHR, textStatus, errorThrown) {
+                console.log('error');
+            }
+        });
+
+    }
+
+    catalogFileList(theApp.currentPath);
+
+
+</script>
+
+
+</body>
+</html>

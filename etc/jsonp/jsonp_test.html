@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+        <script type="text/javascript">
+
+
+            $(function() {
+
+                //var base_url = 'http://goorume.iptime.org:3000';//"http://192.168.0.6:3000";
+                var base_url = 'http://localhost:3000';
+
+                $('#btn_jsonp').on('click', function() {
+                    $('#out').text('connecting.....');
+                    $.ajax({
+                        url: base_url + '/logget',
+                        type: 'GET',
+                        dataType: 'jsonp',
+                        jsonpCallback : 'callback',
+                        data: {somedata: 'gbox3d'},
+
+                        //jsonp: 'callback',
+                        //url: base_url + '/logget?callback=?',
+
+                        success: function(data, textStatus, jqXHR) {
+                            console.log('success receive jsonp data');
+                            console.log( JSON.stringify(data) );
+                            $('#out').text('hello ' + data.echo);
+
+                        },
+                        complete: function(jqXHR, textStatus) {
+                            console.log('complete');
+
+
+                        },
+                        error: function(qXHR, textStatus, errorThrown) {
+                            $('#out').text('error');
+
+                            console.log('error');
+
+
+                        }
+                    });
+                });
+
+            });
+
+
+        </script>
+
+    </head>
+    <body>
+        <button id='btn_jsonp' >test JSONP</button>
+        <div id='out'></div>
+    </body>
+</html>

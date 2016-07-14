@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <script src="jquery-2.0.3.min.js"></script>
+
+</head>
+<body>
+
+<button id="btn-test">test</button>
+
+<script>
+
+    $('#btn-test').on('click',function() {
+
+        $.ajax({
+            url: 'http://localhost:8080' + '/test',
+            type: 'GET',
+            dataType: 'text',
+            data: {msg: 'hello restful!!'},
+
+            success: function(data, textStatus, jqXHR) {
+                console.log(data);
+            },
+            complete: function(jqXHR, textStatus) {
+                console.log('complete');
+
+
+            },
+            error: function(qXHR, textStatus, errorThrown) {
+                $('#out').text('error');
+
+                console.log('error');
+            }
+        });
+
+
+    });
+
+</script>
+
+
+
+</body>
+</html>

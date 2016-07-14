@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+</head>
+<body>
+
+<input id="inp-test">
+<button id="btn-test">test</button>
+
+<script>
+    var sockjs_url = 'http://localhost:9999/echo';
+    var sockjs = new SockJS(sockjs_url);
+
+    sockjs.onopen = function() {
+        console.log('open');
+
+        document.querySelector('#btn-test').addEventListener('click',function() {
+
+            //console.log(document.querySelector('#inp-test').value);
+            sockjs.send(document.querySelector('#inp-test').value);
+
+        });
+
+    };
+    sockjs.onmessage = function(e) {
+        console.log('message', e.data);
+    };
+    sockjs.onclose = function() {
+        console.log('close');
+    };
+
+
+
+
+</script>
+
+
+</body>
+</html>

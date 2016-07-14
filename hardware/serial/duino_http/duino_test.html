@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+    <title></title>
+
+   <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="async.js"></script>
+
+</head>
+<body>
+
+<div id="log" ></div>
+<div>
+    <button id="get-data" >get a0 data</button>
+    <button id="get-dht-data" >get dht data</button>
+</div>
+
+<script>
+
+    function array2String(buffer) {
+
+        var _data = '';
+
+        for(var i=0; i< buffer.length ;i++) {
+
+            _data += String.fromCharCode(buffer[i]);
+
+        }
+
+        return _data;
+
+    }
+
+    document.querySelector('#get-data').addEventListener('click',function(evt) {
+
+        $.ajax({
+            url : 'http://localhost:8080/send',
+            data : {
+                code : '!03A0.'
+            },
+            success : function(data,status,xhr) {
+
+                var data = JSON.parse(data);
+
+                /*
+                console.log(data);
+                var _data = '';
+
+                for(var i=0; i< data.buffer.length ;i++) {
+
+                    _data += String.fromCharCode(data.buffer[i]);
+
+                }
+                */
+
+                console.log( parseInt(array2String(data.buffer)) );
+
+
+            },
+            error : function() {
+
+            },
+            complete : function () {
+
+            }
+
+        });
+
+
+    });
+
+    document.querySelector('#get-dht-data').addEventListener('click',function(evt) {
+
+        async.waterfall(
+                [
+                        function(next) {
+                            $.ajax({
+                                url : 'http://localhost:8080/send2',
+                                data : {
+                                    code : '!911.'
+                                },
+                                success : function(data,status,xhr) {
+
+                                    var data = JSON.parse(data);
+
+                                    var result_str = array2String(data.buffer);
+
+                                    console.log(result_str);
+                                    next(null);
+
+
+                                },
+                                error : function() {
+
+                                },
+                                complete : function () {
+
+                                }
+
+                            });
+
+                        },
+                        function(next) {
+                            $.ajax({
+                                url : 'http://localhost:8080/send2',
+                                data : {
+                                    code : '!912.'
+                                },
+                                success : function(data,status,xhr) {
+
+                                    var data = JSON.parse(data);
+
+                                    var result_str = array2String(data.buffer);
+
+                                    console.log(result_str);
+
+                                    var temp_obj = JSON.parse(result_str);
+
+                                    console.log('습도 :' +temp_obj[0] + '온도:' + temp_obj[1]);
+
+                                    document.querySelector('#log').innerText = '습도 :' +temp_obj[0] + '온도:' + temp_obj[1];
+
+                                    next(null);
+
+
+                                },
+                                error : function() {
+
+                                },
+                                complete : function () {
+
+                                }
+
+                            });
+
+                        }
+                ],
+                function(err,result) {
+
+                }
+        )
+
+
+        //////
+
+    });
+
+
+</script>
+
+
+
+
+</body>
+</html>

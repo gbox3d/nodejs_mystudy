@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+
+<button id="btn-test-post">test post</button>
+<button id="btn-test-get">test get</button>
+
+<div id="text-log" ></div>
+
+<script>
+
+    document.getElementById('btn-test-post').addEventListener('click',function() {
+
+        $.ajax(
+                {
+                    url: 'http://localhost:8080/echo' ,
+                    type: 'POST',
+                    dataType: 'text',
+                    timeout : 3000,
+                    data : {echo : encodeURIComponent("post test!@#$%&/\\")},
+                    success: function(data, textStatus, jqXHR) {
+
+                        document.getElementById('text-log').innerText = decodeURIComponent(
+                                data
+                        );
+
+                    },
+                    error: function(jqXHR, textStatus) {
+                        console.log(textStatus);
+
+                    },
+                    complete: function(jqXHR, textStatus, errorThrown) {
+
+                    }
+                }
+        );
+
+    });
+
+    document.getElementById('btn-test-get').addEventListener('click',function() {
+
+        $.ajax(
+                {
+                    //url: 'http://localhost:8080/echo' ,
+                    url: 'http://192.168.9.177:18080/echo' ,
+                    type: 'GET',
+                    dataType: 'text',
+                    timeout : 3000,
+                    data : {echo : encodeURIComponent("post test!@#$%&/\\")},
+                    success: function(data, textStatus, jqXHR) {
+
+                        document.getElementById('text-log').innerText = decodeURIComponent(
+                                data
+                        );
+
+                    },
+                    error: function(jqXHR, textStatus) {
+                        console.log(textStatus);
+
+                    },
+                    complete: function(jqXHR, textStatus, errorThrown) {
+
+                    }
+                }
+        );
+
+    });
+
+</script>
+
+</body>
+</html>

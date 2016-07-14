@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+
+<div class="upload-image" style="height: 80px;">
+    <input type="file" name="file">
+</div>
+
+<button id="btn-upload" >upload</button>
+
+<script>
+
+    function uploadProgress(evt) {
+        if (evt.lengthComputable) {
+            var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+            console.log( percentComplete.toString() + '%');
+        }
+        else {
+
+        }
+    }
+
+    function uploadComplete(evt) {
+        alert(evt.target.responseText);
+    }
+
+    function uploadFailed(evt) {
+        alert("There was an error attempting to upload the file.");
+    }
+
+    function uploadCanceled(evt) {
+        alert("The upload has been canceled by the user or the browser dropped the connection.");
+    }
+
+
+    document.querySelector('#btn-upload').addEventListener('click',function(evt) {
+        var fd = new FormData();
+        fd.append("file", document.querySelector('.upload-image input[name=file]').files[0]);
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", uploadProgress, false);
+        xhr.addEventListener("load", uploadComplete, false);
+        xhr.addEventListener("error", uploadFailed, false);
+        xhr.addEventListener("abort", uploadCanceled, false);
+        xhr.open("POST", 'http://localhost:8081/file-upload');
+        xhr.send(fd);
+
+    });
+
+
+
+</script>
+
+</body>
+</html>

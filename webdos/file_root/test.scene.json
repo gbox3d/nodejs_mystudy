@@ -1,0 +1,51 @@
+{
+	"metadata": {
+		"version": 4.3,
+		"type": "Object",
+		"generator": "ObjectExporter"
+	},
+	"geometries": [
+		{
+			"uuid": "8A6B2F28-05A2-4C16-9289-513CB1E4B900",
+			"type": "BoxGeometry",
+			"width": 100,
+			"height": 100,
+			"depth": 100,
+			"widthSegments": 1,
+			"heightSegments": 1,
+			"depthSegments": 1
+		}],
+	"materials": [
+		{
+			"uuid": "F254ADCE-EB8B-4074-A126-AC7231902669",
+			"type": "MeshPhongMaterial",
+			"color": 16736892,
+			"ambient": 16777215,
+			"emissive": 0,
+			"specular": 1118481,
+			"shininess": 30
+		}],
+	"object": {
+		"uuid": "2909A26F-452A-4E37-8D37-DAD02AFA762B",
+		"type": "Scene",
+		"name": "Scene",
+		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+		"children": [
+			{
+				"uuid": "96C9F3B4-37DD-48DC-A651-FEB1291BDF28",
+				"type": "Mesh",
+				"name": "Box 1",
+				"geometry": "8A6B2F28-05A2-4C16-9289-513CB1E4B900",
+				"material": "F254ADCE-EB8B-4074-A126-AC7231902669",
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,35.827796936035156,0,1]
+			},
+			{
+				"uuid": "A74D6B06-268E-4374-8B48-5B2D1291A0CE",
+				"type": "DirectionalLight",
+				"name": "DirectionalLight 1",
+				"color": 16777215,
+				"intensity": 1,
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,-176.55923461914062,145.09124755859375,150,1]
+			}]
+	}
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://localhost:8080/socket.io/socket.io.js"></script>
+</head>
+<body>
+
+<button id="btn-test" >test</button>
+
+<script>
+
+    var socket = io('http://localhost:8080');
+
+    //서버에서 날라오는 메씨지
+    socket.on('this', function (data) {
+        console.log(data);
+
+    });
+
+    document.querySelector('#btn-test').addEventListener('click',function() {
+
+        //서버로 보내기
+        socket.emit('private message', { my: 'hello socket' },'test');
+
+    });
+
+
+
+
+</script>
+
+</body>
+</html>
