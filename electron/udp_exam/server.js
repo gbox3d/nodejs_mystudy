@@ -2,14 +2,15 @@
  * Created by gbox3d on 2014. 9. 16..
  */
 //var host = "127.0.0.1", port = 33333;
-var host = "192.168.219.9", port = 33333;
+//var host = "192.168.219.9", port = 33333;
+
 
 var dgram = require( "dgram" );
 
 var server = dgram.createSocket( "udp4" );
 
 var remote_client;
-
+var port = 33333;
 server.on( "message", function( msg, rinfo ) {
 
     remote_client = rinfo;

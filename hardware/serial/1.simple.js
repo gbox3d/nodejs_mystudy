@@ -2,13 +2,13 @@
  * Created by gbox3d on 15. 3. 3..
  */
 
-var serialport = require("/usr/local/lib/node_modules/serialport");
+const serialport = require("/usr/local/lib/node_modules/serialport");
 var baudrate = 9600;
 
 //ls /dev | grep usb
-var serialPort = new serialport.SerialPort(
+var serialPort = new serialport(
     //"/dev/ttyAMA0", //UART 씨리얼
-    "/dev/tty.usbmodem1411",
+    "/dev/tty.usbserial",
     {
         baudrate: 9600//,
         //parser: serialport.parsers.readline("\r\n") //개행문자기준으로 끊어주기

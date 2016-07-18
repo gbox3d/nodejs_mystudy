@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+
+<button id="btn-file-test" > file read test </button>
+
+
+
+<script>
+
+    const fs = require('fs');
+
+    document.querySelector('#btn-file-test').addEventListener('click',(evt)=>{
+
+        fs.readFile("test.txt",{
+            encoding : 'utf8'
+        },(err,data)=> {
+
+            if(err) {
+
+            }else {
+                console.log(data);
+            }
+
+        });
+
+    });
+
+
+
+</script>
+
+</body>
+</html>

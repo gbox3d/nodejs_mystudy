@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+
+<button id="btn-test" > send test </button>
+
+
+
+<script>
+
+
+    var dgram = require( "dgram" );
+    var client = dgram.createSocket( "udp4" );
+
+    client.on( "message", function( msg, rinfo ) {
+        console.log( "The packet came back" );
+        console.log(msg);
+        console.log(msg.toString());
+    });
+
+    let port = 33334;
+    // client listens on a port as well in order to receive ping
+    client.bind( port );
+
+
+    document.querySelector('#btn-test').addEventListener('click',(evt)=>{
+
+        var message = new Buffer( "hello udp!" );
+        client.send(
+                message, 0,
+                message.length,
+                //33333, "127.0.0.1" );
+                33333, "localhost" );
+
+    });
+
+
+
+</script>
+
+</body>
+</html>
