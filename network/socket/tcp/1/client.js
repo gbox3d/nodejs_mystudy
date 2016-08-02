@@ -7,7 +7,7 @@ var net = require('net');
 //var PORT = 8081;
 
 var HOST = '192.168.9.108';
-var PORT = 2323;
+var PORT = 8070;
 
 
 var client = new net.Socket();

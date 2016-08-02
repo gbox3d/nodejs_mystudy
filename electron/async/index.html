@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+
+    <!--<script src="async.js" > </script>-->
+
+</head>
+<body>
+
+<h1 id="test" >Hello World!</h1>
+
+
+<script>
+
+    //노드 모듈로 인식된다.
+    const async = require('async');
+
+    async.waterfall([
+            function (next) {
+                next();
+            }
+
+    ],
+    function (err, result) {
+
+        console.log('complete');
+
+        document.querySelector('#test').innerText = 'async ok';
+
+    });
+
+
+
+</script>
+
+</body>
+</html>
