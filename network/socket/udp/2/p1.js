@@ -1,10 +1,12 @@
 /**
  * Created by gbox3d on 2014. 9. 17..
  */
-var host = "127.0.0.1", port = 33333;
+//var host = "127.0.0.1", port = 33333;
+var host = "localhost", port = 33333;
 
 var remote = {
-    address : '192.168.0.9',
+    //address : '192.168.0.9',
+    address : 'localhost',
     port : 33334
 }
 

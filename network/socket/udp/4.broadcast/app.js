@@ -13,8 +13,8 @@ client.bind(
 );
 
 function loop() {
-    var message = new Buffer( "hello udp!" );
-    client.send(message, 0, message.length, 33333, "192.168.9.255");
+    var message = new Buffer( JSON.stringify({msg : 'hello udp'}) );
+    client.send(message, 0, message.length, 8086, "192.168.9.255");
 
     console.log('send udp');
 
