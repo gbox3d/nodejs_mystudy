@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+</head>
+
+<body>
+    <h1>Hello World!</h1>
+    We are using node
+    <script>
+        document.write(process.versions.node)
+    </script>, Chrome
+    <script>
+        document.write(process.versions.chrome)
+    </script>, and Electron
+    <script>
+        document.write(process.versions.electron)
+    </script>.
+
+    <script>
+        /**
+         * Created by gbox3d on 15. 3. 5..
+         */
+
+        var serialport = require("serialport");
+        var baudrate = 115200;
+
+        //ls /dev | grep usb
+        var serialPort = new serialport(
+            "/dev/tty.wchusbserial142420", {
+                baudrate: baudrate
+                    //parser: serialport.parsers.readline("\r\n") //개행문자기준으로 마샬링해주기
+            }
+        );
+
+
+        serialPort.on("open", function() {
+            console.log('open at baudrate :' + baudrate);
+
+
+            setTimeout(function() {
+
+                console.log('send test');
+                serialPort.write('QV', function() {});
+
+            }, 3000);
+
+            //데이터 읽기
+            serialPort.on('data', function(data) {
+                console.log(data);
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>
