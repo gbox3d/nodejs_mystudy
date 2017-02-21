@@ -1,29 +1,29 @@
 {
-  "name": "electron-uart",
-  "version": "1.0.0",
-  "description": "A minimal Electron application with node serialport",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-    "install": "electron-rebuild"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:gbox3d/"
-  },
-  "keywords": [
-    "Electron",
-    "uart",
-    "demo"
-  ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
-  "devDependencies": {
-    "electron": "^1.6.0",
-    "electron-rebuild": "^1.5.7"
-  },
-  "dependencies": {
-    "data-table": "^2.0.0",
-    "serialport": "^4.0.7"
-  }
+    "name": "electron-uart",
+    "version": "1.0.0",
+    "description": "A minimal Electron application with node serialport",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "install": "electron-rebuild"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:gbox3d/"
+    },
+    "keywords": [
+        "Electron",
+        "uart",
+        "demo"
+    ],
+    "author": "GitHub",
+    "license": "CC0-1.0",
+    "devDependencies": {
+        "electron": "^1.4.1",
+        "electron-rebuild": "^1.4.0"
+    },
+    "dependencies": {
+
+        "serialport": "^4.0.7"
+    }
 }
