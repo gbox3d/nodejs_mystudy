@@ -17,42 +17,12 @@
     </script>, and Electron
     <script>
         document.write(process.versions.electron)
-    </script>.
+    </script>
 
-    <script>
-        /**
-         * Created by gbox3d on 15. 3. 5..
-         */
+    <div id="error"></div>
+    <div id="ports"></div>
 
-        var serialport = require("serialport");
-        var baudrate = 115200;
-
-        //ls /dev | grep usb
-        var serialPort = new serialport(
-            "/dev/tty.wchusbserial142420", {
-                baudrate: baudrate
-                    //parser: serialport.parsers.readline("\r\n") //개행문자기준으로 마샬링해주기
-            }
-        );
-
-
-        serialPort.on("open", function() {
-            console.log('open at baudrate :' + baudrate);
-
-
-            setTimeout(function() {
-
-                console.log('send test');
-                serialPort.write('QV', function() {});
-
-            }, 3000);
-
-            //데이터 읽기
-            serialPort.on('data', function(data) {
-                console.log(data);
-            });
-
-        });
+    <script src="app.js">
     </script>
 
 </body>
