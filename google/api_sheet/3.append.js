@@ -19,8 +19,9 @@ const async = require('async');
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/sheets.googleapis.com-nodejs-quickstart.json
 var SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
-var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
-    process.env.USERPROFILE) + '/.credentials/';
+//var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
+//    process.env.USERPROFILE) + '/.credentials/';
+var TOKEN_DIR = './.credentials/'
 var TOKEN_PATH = TOKEN_DIR + 'sheets.googleapis.mytest1.json';
 
 console.log(TOKEN_PATH)
@@ -112,7 +113,7 @@ function storeToken(token) {
 
 /**
  * Print the names and majors of students in a sample spreadsheet:
- * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+ * https://docs.google.com/spreadsheets/d/19BODI1yuVymEHXHAD6CvJ6pKbCQX39cGemKUl2A89-8/edit
  */
 
 
@@ -120,22 +121,22 @@ function storeToken(token) {
 function listMajors(auth) {
     var sheets = google.sheets('v4');
 
-
-    async .waterfall([
-            function (next) {
+    //1yeMBpUD0YSHwnzhThqQeYcG2WIML3tKHl6mN3se25-k
+    async.waterfall([
+            function(next) {
                 var request = {
                     // The ID of the spreadsheet to update.
-                    spreadsheetId: '19BODI1yuVymEHXHAD6CvJ6pKbCQX39cGemKUl2A89-8',  // TODO: Update placeholder value.
+                    spreadsheetId: '19BODI1yuVymEHXHAD6CvJ6pKbCQX39cGemKUl2A89-8', // TODO: Update placeholder value.
                     // The A1 notation of the values to update.
-                    range: 'sheet1!A1:D1',  // TODO: Update placeholder value.
+                    range: '2017!A1:D1', // TODO: Update placeholder value.
                     resource: {
-                        majorDimension : "ROWS",
+                        majorDimension: "ROWS",
                         // TODO: Add desired properties of the request body.
-                        values : [
-                            [5,6,7,8]
+                        values: [
+                            [5, 6, 7, 8]
                         ]
                     },
-                    valueInputOption : "RAW",
+                    valueInputOption: "RAW",
                     auth: auth
                 };
 
@@ -154,11 +155,10 @@ function listMajors(auth) {
             }
 
         ],
-        function (err) {
-            if(err) {
+        function(err) {
+            if (err) {
 
-            }
-            else {
+            } else {
                 console.log('success all');
             }
         }
