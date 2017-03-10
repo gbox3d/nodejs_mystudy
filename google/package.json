@@ -1,0 +1,9 @@
+{
+    "name": "google api sample",
+    "version": "1.0.0",
+    "description": "google api sample",
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {},
+    "dependencies": {}
+}
