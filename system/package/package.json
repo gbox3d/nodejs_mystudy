@@ -1,0 +1,14 @@
+{
+  "name": "test-project",
+  "version": "1.0.0",
+  "description": "electron framework",
+  "main": "main.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.1.5"
+  }
+}
