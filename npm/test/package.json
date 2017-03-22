@@ -1,0 +1,20 @@
+{
+  "name": "testapp",
+  "version": "0.0.1",
+  "bin": {
+    "testapp": "app.js"
+  },
+  "description": "my run test",
+  "main": "app.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "start": "node app.js"
+  }
+
+}
