@@ -1,6 +1,14 @@
 {
   "name": "application-name",
   "version": "0.0.1",
-  "main"    : "main.js"
-
+  "main"    : "main.js",
+  "scripts": {
+        "start": "electron ./"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "electron": "^1.4.15",
+        "electron-rebuild": "^1.5.7"
+    }
 }

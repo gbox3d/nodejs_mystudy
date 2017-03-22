@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
 </head>
+
 <body>
-<h1>Hello World!</h1>
-We are using node <script>document.write(process.versions.node)</script>,
-Chrome <script>document.write(process.versions.chrome)</script>,
-and Electron <script>document.write(process.versions.electron)</script>.
+    <h1>Hello World! <span id='statusmsg'></span> </h1>
+    We are using node <span id='nodeversion'></span> ,Chrome <span id='chromeversion'></span> , and Electron <span id='electronversion'></span>
+
+    <script>
+        try {
+
+            document.querySelector("#nodeversion").innerText = process.versions.node;
+            document.querySelector("#chromeversion").innerText = process.versions.chrome;
+            document.querySelector("#electronversion").innerText = process.versions.electron;
+            document.querySelector("#statusmsg").innerText = 'electron system OK';
+
+
+        } catch (e) {
+            document.querySelector("#statusmsg").innerText = 'electron system Error';
+        }
+    </script>
+
 </body>
+
 </html>
