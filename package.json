@@ -1,0 +1,27 @@
+{
+  "name": "nodejs_mystudy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tiny_websrv.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gbox3d/nodejs_mystudy.git"
+  },
+  "keywords": [
+    "nodejs",
+    "example",
+    "tutorial"
+  ],
+  "author": "gbox3d",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gbox3d/nodejs_mystudy/issues"
+  },
+  "homepage": "https://github.com/gbox3d/nodejs_mystudy#readme",
+  "dependencies": {
+    "node-mouse": "0.0.2"
+  }
+}
