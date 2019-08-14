@@ -22,7 +22,10 @@
   },
   "homepage": "https://github.com/gbox3d/nodejs_mystudy#readme",
   "dependencies": {
+    "aplay": "^1.2.0",
     "canvas": "^2.5.0",
-    "node-mouse": "0.0.2"
+    "node-mouse": "0.0.2",
+    "play": "^0.5.0",
+    "player": "^0.6.1"
   }
 }
