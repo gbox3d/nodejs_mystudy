@@ -4,35 +4,14 @@
     <meta charset="UTF-8">
     <title>Test</title>
 </head>
-<body>
+
+<body data-appname="file-exam">
 
 <button id="btn-file-test" > file read test </button>
 
+<div id="output" ></div>
 
-
-<script>
-
-    const fs = require('fs');
-
-    document.querySelector('#btn-file-test').addEventListener('click',(evt)=>{
-
-        fs.readFile("test.txt",{
-            encoding : 'utf8'
-        },(err,data)=> {
-
-            if(err) {
-
-            }else {
-                console.log(data);
-            }
-
-        });
-
-    });
-
-
-
-</script>
+<script src='./renderer.js' ></script>
 
 </body>
 </html>
