@@ -3,6 +3,8 @@ const server = dgram.createSocket( "udp4" );
 
 server.on( "message", function( msg, rinfo ) {
 
+    console.log(rinfo)
+    console.log(msg)
 
 });
 
@@ -13,3 +15,5 @@ if(process.argv.length >= 3) {
 }
 
 server.bind( port );
+
+console.log(`bind at ${port}`)
