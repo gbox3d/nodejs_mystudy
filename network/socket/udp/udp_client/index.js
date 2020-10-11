@@ -6,7 +6,8 @@ const udp_socket = dgram.createSocket("udp4");
 
 udp_socket.on("message", function (msg, rinfo) {
     console.log(rinfo)
-    console.log(msg);
+    console.log(msg)
+    console.log(msg.toString())
     //remote_client = rinfo;
     //udp_socket.send( Buffer([0x02,0x03]), 0,2, rinfo.port, rinfo.address ); // added missing bracket
     // let resBuf = Buffer('ok')
@@ -17,6 +18,7 @@ if(process.argv.length >= 3) {
     local.port = parseInt(process.argv[2])
 }
 
+let local = {}
 if (local.port > 0) {
     udp_socket.bind(local.port);
     console.log(`bind at ${local.port}`);
@@ -31,7 +33,7 @@ var theApp = {
 }
 
 theApp.sendText = (ip, port, msg) => {
-    udp_socket.send(Buffer(msg), 0, 2, port, ip); // added missing bracket
+    udp_socket.send(Buffer.from(msg), 0, msg.length, port, ip); // added missing bracket
 }
 
 var repl_context = repl.start({
