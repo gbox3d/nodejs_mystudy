@@ -180,3 +180,4 @@ jspm_packages
 .credentials
 .client_secret.json
 
+package-lock.json
