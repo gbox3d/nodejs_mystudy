@@ -14,11 +14,12 @@ udp_socket.on("message", function (msg, rinfo) {
     // udp_socket.send(resBuf , 0,resBuf.length, remote.port ,remote.address)
 })
 
+let local = {}
+
 if(process.argv.length >= 3) {
     local.port = parseInt(process.argv[2])
 }
 
-let local = {}
 if (local.port > 0) {
     udp_socket.bind(local.port);
     console.log(`bind at ${local.port}`);
