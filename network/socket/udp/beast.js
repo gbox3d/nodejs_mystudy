@@ -10,7 +10,7 @@ udp_socket.on("message", function (msg, rinfo) {
 function loop() {
 
     let ip = '113.61.2.36'
-    let port = 42529
+    let port = 41716
     //113.61.2.36:42529
 
     let _data = 'hello p2p'
