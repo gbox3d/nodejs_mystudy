@@ -90,3 +90,5 @@ typings/
 .dynamodb/
 
 build/
+
+package-lock.json
