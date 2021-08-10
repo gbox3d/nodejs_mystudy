@@ -12,8 +12,11 @@
 
 var gVersionString = "0.3.3"
 
-var fs = require('fs');
-var http = require('http');
+// var fs = require('fs');
+// var http = require('http');
+
+import fs from 'fs'
+import http from 'http'
 
 
 var gPort = 8080;
@@ -26,10 +29,14 @@ if(custom_port) {
 
 
 var server = http.createServer(function(request, response) {
+
     var url = request.url;
     var file_ext = url.slice(url.lastIndexOf('.'), url.length);
+    let base_dir = '.'
 
-    url = '.' + url;
+    url = base_dir + url;
+
+    console.log(url)
 
     if (url == './') {
         fs.readFile('index.html', function(error, data) {
