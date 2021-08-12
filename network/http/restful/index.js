@@ -7,6 +7,9 @@ http.createServer((req, res) => {
     console.log(`url : ${req.url}`);
     console.log(`method :  ${req.method}`);
 
+    console.log(req.headers)
+    
+
     // 원격주소 얻기 
     try {
         var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -22,7 +25,7 @@ http.createServer((req, res) => {
         'http://example.org/' //base url (The base URL to resolve against if the input is not absolute.)
     );
 
-    console.log(`path name : ${urlObj.pathname}`  );
+    console.log(`path name : ${urlObj.pathname}`);
     console.log(`serch ${urlObj.search}`);
     console.log(`hostname : ${urlObj.hostname}`);
 
@@ -37,13 +40,34 @@ http.createServer((req, res) => {
         "Access-Control-Allow-Headers": "*" //CORS 정책 허용  * 는 모두 허용 
     }
 
-    if(urlObj.pathname === '/echo') {
-        let msg = urlObj.searchParams.get('msg');
-        result.echo = `u say ${msg}`
-    }
+    let method = req.method;
+    if (method == 'POST') {
 
-    res.writeHead(200, header);
-    res.end(JSON.stringify(result));
+        if (urlObj.pathname === '/echo') {
+            let body_data = '';
+            //포스트는 데이터가 조각조각 들어 온다.
+            req.on('data', function (data) {
+                body_data += data;
+                console.log(data.toString());
+                result.body = body_data;
+            });
+
+            //데이터를 다 받았으면
+            req.on('end', function () {
+                res.writeHead(200, header);
+                res.end(JSON.stringify(result));
+
+            });
+        }
+    }
+    else if (method == 'GET') {
+        if (urlObj.pathname === '/echo') {
+            let msg = urlObj.searchParams.get('msg');
+            result.echo = `u say ${msg}`
+        }
+        res.writeHead(200, header);
+        res.end(JSON.stringify(result));
+    }
 
 
 }).listen(server_port);
