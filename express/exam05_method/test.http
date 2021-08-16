@@ -1,0 +1,17 @@
+### post test
+POST http://localhost:8080/api/v2/login/ajax
+Content-Type : application/json;charset=UTF-8
+
+{"name":"tommy"}
+
+### post test
+POST http://localhost:8080/api/v1/login/axios
+Content-Type : application/json;charset=UTF-8
+
+{"name":"tommy"}
+
+### post test from data
+POST http://localhost:8080/api/v1/login/treditional
+Content-Type : application/x-www-form-urlencoded
+
+name=tommy
