@@ -1,7 +1,11 @@
 import express from 'express'
 import path from 'path'
+import dotenv from 'dotenv'
+
+dotenv.config();
+
 const app = express()
-const server_port = 8080
+const server_port = process.env.PORT
 
 app.get('/',(req,res)=> {
     
@@ -23,6 +27,8 @@ app.get('/form_page',(req,res)=> {
 })
 
 app.get('/json_data',(req,res)=> {
+    // res.set('Access-Control-Allow-Origin', 'http://localhost:8080') //cors 에러 대비책
+    res.set('Access-Control-Allow-Origin', '*') //cors 에러 대비책
     res.json({
         name : 'tommy',
         age : 21,
