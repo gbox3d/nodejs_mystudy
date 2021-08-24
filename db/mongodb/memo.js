@@ -9,7 +9,10 @@ export default (db_client) => {
     app.use('/',(req,res,next)=> {
         // console.log(req)
         console.log(`${req.originalUrl} cros allow`)
-        res.set('Access-Control-Allow-Origin', '*');
+        // res.set('Access-Control-Allow-Origin', '*');
+        res.set('Access-Control-Allow-Origin','*'); //cors 전체 허용
+        res.set('Access-Control-Allow-Methods', '*');
+        res.set("Access-Control-Allow-Headers", "*");
         next();
     });
 
