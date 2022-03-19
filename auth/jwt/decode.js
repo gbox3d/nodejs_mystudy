@@ -1,12 +1,21 @@
-const jwt = require('jsonwebtoken');
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+import fs from 'fs-extra';
 
-cert = 'JwTsEcReTkEyOrHaShInG'
-token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE2NDc1MTE3MTh9.q_D1z02FO6MJLowoXWvOpBNBIGY1ZFSTQ7i0IP94fQE'
+console.log(__dirname)
+dotenv.config(
+    {
+        path: `${__dirname}/.env`
+    }
+);
+
 try {
+    var token = fs.readFileSync(`${__dirname}/token.txt `, 'utf8');
     // console.log(req.headers.authorization)
     // console.log(process.env.JWT_SECRET)
     // 요청 헤더에 저장된 토큰(req.headers.authorization)과 비밀키를 사용하여 토큰 반환
-    decoded = jwt.verify(token, cert);
+
+    var decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     console.log(decoded);
 }
