@@ -1,6 +1,3 @@
-/**
- * Created by gunpower on 2016. 8. 25..
- */
 
 let host = "127.0.0.1", port = 33333;
 

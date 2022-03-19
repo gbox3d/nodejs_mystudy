@@ -1,6 +1,3 @@
-/**
- * Created by gunpower on 2016. 6. 20..
- */
 
 var dgram = require( "dgram" );
 

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div>
+        <form action="/api/v1/login/treditional" method="POST">
+            <!-- <form action="/api/v2/login/treditional" method="POST"> -->
+            <h3>Traditional Form</h3>
+            <div class="form-row">
+                <label for="name"> enter name </label>
+                <input type="text" name="name" id="name" autocomplete="false" />
+            </div>
+            <button type="submit" class="block">submit</button>
+        </form>
+    </div>
+
+    <div>
+        <form>
+            <h3>Javascript Form</h3>
+            <div class="form-row">
+                <label for="name"> enter name </label>
+                <input type="text" name="name" id="name" class="form-input" autocomplete="false" />
+                <small class="form-alert"></small>
+            </div>
+            <button type="submit" class="block submit-btn">submit</button>
+        </form>
+
+        <div class="result">
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous"></script>
+        
+    <script>
+        const result = document.querySelector('.result')
+
+        // submit form
+        const btn = document.querySelector('.submit-btn')
+        const input = document.querySelector('.form-input')
+        const formAlert = document.querySelector('.form-alert')
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault()
+            const nameValue = input.value
+
+            try {
+                // http://localhost:8080/api/v2/login
+                const {data} = await axios.post('http://localhost:8080/api/v1/login/axios', { name: nameValue })
+                // console.log(_res)
+                const h5 = document.createElement('h5')
+                h5.textContent = data.person
+                result.appendChild(h5)
+            } catch (error) {
+                // console.log(error.response)
+                if(error.name == 'TypeError') {
+                    formAlert.textContent = error.msg
+                }
+                else {
+                    formAlert.textContent = error.response.data.msg
+                }
+            }
+            input.value = ''
+        })
+    </script>
+
+</body>
+
+</html>

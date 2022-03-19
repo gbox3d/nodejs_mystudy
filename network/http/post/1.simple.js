@@ -79,10 +79,13 @@ function process_post(req, res) {
 
     console.log("incomming post data !");
 
+    console.log(req.headers)
+    console.log(req.url)
+
     //포스트는 데이터가 조각조각 들어 온다.
     req.on('data',function(data) {
         body_data += data;
-        console.log(data);
+        console.log(data.toString()  );
     });
 
     //데이터를 다 받았으면

@@ -1,0 +1,7 @@
+### hello rest 
+GET http://localhost:8080/echo?msg=hey
+
+### post test
+POST http://localhost:8080/echo
+
+hello post

@@ -1,0 +1,8 @@
+### hello rest 
+GET http://localhost:8001/rest/get/test?name=gbox&number=666
+
+### Post test
+POST http://localhost:8001/rest/post/test
+test-msg : gbox3d
+
+hello post body

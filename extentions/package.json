@@ -1,0 +1,22 @@
+{
+  "name": "tips",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "tip01_dotenv.js",
+  "scripts": {
+    "tip01": "node tip01_dotenv",
+    "tip02": "cross-env NODE_ENV=product node tip02_cross_env",
+    "tip03" : "node tip03_fs_ext",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "fs-extra": "^10.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}

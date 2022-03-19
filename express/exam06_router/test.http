@@ -1,0 +1,20 @@
+### user main
+GET http://localhost:8080/api/user
+
+### user list
+GET http://localhost:8080/api/user/list
+
+### user entry
+GET http://localhost:8080/api/user/entry/100
+
+### product main
+GET http://localhost:8080/api/product
+
+### product list
+GET http://localhost:8080/api/product/list
+
+### post test
+POST http://localhost:8080/api/product/insert
+Content-Type : application/json;charset=UTF-8
+
+{"name":"tommy","age":28}
