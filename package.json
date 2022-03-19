@@ -22,13 +22,6 @@
   },
   "homepage": "https://github.com/gbox3d/nodejs_mystudy#readme",
   "dependencies": {
-    "aplay": "^1.2.0",
-    "canvas": "^2.5.0",
-    "node-fetch": "^2.6.1",
-    "node-mouse": "0.0.2",
-    "play": "^0.5.0",
-    "player": "^0.6.1",
-    "speaker": "^0.4.2",
-    "wav": "^1.0.2"
+    "jsonwebtoken": "^8.5.1"
   }
 }
