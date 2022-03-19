@@ -1,8 +1,8 @@
 console.log('theApp check point 1')
 
 const store = {
-    name : '',
-    count : 0
+    // name : '',
+    // count : 0
 }
 
 

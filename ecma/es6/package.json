@@ -1,12 +1,19 @@
 {
   "name": "es6",
   "version": "1.0.0",
-  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "ex01": "babel-node ./exam01_global/index.js",
+    "ex02": "babel-node ./exam02/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "gbox3d",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11"
+  }
 }
